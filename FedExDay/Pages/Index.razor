@@ -1,0 +1,44 @@
+﻿@page "/"
+@using FedExDay.Model;
+@using FedExDay.Services;
+@inject IBungieService BungieService;
+
+<PageTitle>Destiny 2 Profile Search</PageTitle>
+
+<h1>Search for a Destiny 2 profile!</h1>
+
+<EditForm Model="@Username" OnValidSubmit="@SearchUser">
+    <div class="input-group mb-3">
+        <input type="text" @bind="@Username" class="form-control" placeholder="username" aria-label="Username" aria-describedby="btn-search">
+        <button class="btn btn-primary" type="submit" id="btn-search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+        </button>
+    </div>
+</EditForm>
+
+
+@if (@results == null)
+{
+    <p>No results...</p>
+}
+else
+{
+    @foreach (var user in results.Response.searchResults)
+    {
+        <UserProfile userSearchResult="@user" />
+    }
+}
+
+@code {
+    private string bungieNet = "https://www.bungie.net";
+    private string Username { get; set; } = "";
+    private UserSearchResponse? results;
+
+    private async Task SearchUser()
+    {
+        results = null;
+        results = await BungieService.SearchUsersAsync(Username);
+    }
+}

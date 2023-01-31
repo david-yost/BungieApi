@@ -1,0 +1,73 @@
+﻿@using FedExDay.Model;
+@using FedExDay.Services;
+@inject IBungieService BungieService;
+
+<div class="card">
+    <div class="card-header">
+        <h2>@($"{@userSearchResult.bungieGlobalDisplayName}#{userSearchResult.bungieGlobalDisplayNameCode}")  (@userSearchResult.bungieNetMembershipId)</h2>
+    </div>
+    <div class="card-body">
+
+
+        @foreach (var membership in userSearchResult.destinyMemberships)
+        {
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4 bg-secondary">
+                        <img src="@($"{@bungieNet}{@membership?.iconPath}")" class="img-fluid rounded-start mx-auto d-block" style="height: 256px; width: 256px; margin:20px;" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><b>@membership?.bungieGlobalDisplayName</b>#@membership?.bungieGlobalDisplayNameCode</h5>
+
+                            @if (historicalStats == null)
+                            {
+                                <button @onclick="() => GetProfileDetails(membership.membershipType, membership.membershipId)" class="btn btn-outline-primary" type="button" id="btn-search">View Stats</button>
+                            }
+                            else
+                            {
+
+                                @foreach (var character in historicalStats.Response.characters)
+                                {
+                                    var charProfile = characterData?.Where(c => c.characterId == character.characterId).FirstOrDefault();
+                                    <CharacterStats characterProfile="charProfile" characterStats="character" />
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br />
+
+@code {
+    [Parameter]
+    public SearchResults userSearchResult { get; set; }
+
+    private string bungieNet = "https://www.bungie.net";
+
+    private HistoricalStatsForAccountResponse? historicalStats;
+    private List<Data>? characterData;
+
+    private async Task GetProfileDetails(int membershipType, string destinyMembershipId)
+    {
+        try
+        {
+            historicalStats = await BungieService.GetHistoricalStatsForAccountAsync(membershipType, destinyMembershipId);
+
+            characterData = new List<Data>();
+            foreach (var c in historicalStats.Response.characters)
+            {
+                var character = await BungieService.GetCharactersAsync(membershipType, destinyMembershipId, c.characterId);
+                characterData.Add(character.Response.character.data);
+            }
+        }
+        catch(Exception exc)
+        {
+            // do nothing...
+        }
+
+    }
+}

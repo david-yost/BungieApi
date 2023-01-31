@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FedExDay", "FedExDay\FedExDay.csproj", "{57EB7BD0-95D5-477E-8A4C-DCA8D08ED800}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FedExTests", "FedExTests\FedExTests.csproj", "{6B09657C-8ED7-4F4A-B860-E74019CA6A26}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57EB7BD0-95D5-477E-8A4C-DCA8D08ED800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57EB7BD0-95D5-477E-8A4C-DCA8D08ED800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57EB7BD0-95D5-477E-8A4C-DCA8D08ED800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57EB7BD0-95D5-477E-8A4C-DCA8D08ED800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B09657C-8ED7-4F4A-B860-E74019CA6A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B09657C-8ED7-4F4A-B860-E74019CA6A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B09657C-8ED7-4F4A-B860-E74019CA6A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B09657C-8ED7-4F4A-B860-E74019CA6A26}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11552561-074F-4815-A5D8-AF8DDA7756C3}
+	EndGlobalSection
+EndGlobal

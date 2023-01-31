@@ -1,0 +1,22 @@
+﻿@using FedExDay.Model;
+
+<div class="card bg-dark text-white">
+    <img src="@($"{@bungieNet}{characterProfile?.emblemBackgroundPath}")" class="card-img" alt="...">
+    <div class="card-img-overlay" style="background: rgba(0, 0, 0, 0.5);">
+        <h5 class="card-title">@($"Character Id: {characterStats?.characterId}")</h5>
+        <p class="card-text">@($"Combat Efficiency: {characterStats?.results?.allPvP?.allTime?.efficiency?.basic.displayValue ?? "(n/a)"}, Win/Loss Ratio: {characterStats?.results?.allPvP?.allTime?.winLossRatio?.basic.displayValue ?? "(n/a)"}")</p>
+        <p class="card-text">@($"Total Minutes Played: {characterProfile?.minutesPlayedTotal ?? "(n/a)"}")</p>
+        <p class="card-text">Last played: @characterProfile?.dateLastPlayed</p>
+    </div>
+</div>
+<br />
+
+@code {
+    [Parameter]
+    public Data characterProfile { get; set; }
+
+    [Parameter] 
+    public Character characterStats { get; set; }
+
+    private string bungieNet = "https://www.bungie.net";
+}
